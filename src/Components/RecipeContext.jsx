@@ -84,7 +84,7 @@ export const RecipeProvider = ({ children }) => {
     }
   };
 
-  // Toggle save/unsave recipe
+  
   const toggleRecipeSave = (recipe) => {
     setSavedRecipes((prev) => {
       const isAlreadySaved = prev.some((saved) => saved.uri === recipe.uri);
@@ -92,13 +92,13 @@ export const RecipeProvider = ({ children }) => {
         ? prev.filter((saved) => saved.uri !== recipe.uri)
         : [...prev, recipe];
 
-      // Update localStorage
+
       localStorage.setItem("savedRecipes", JSON.stringify(updatedRecipes));
       return updatedRecipes;
     });
   };
 
-  // Load saved recipes from localStorage
+ 
   useEffect(() => {
     const storedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
     setSavedRecipes(storedRecipes);

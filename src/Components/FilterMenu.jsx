@@ -7,9 +7,8 @@ import Button from "./Button";
 
 const FilterMenu = ({ isOpen, onClose, onKeyDown, query, setQuery }) => {
   const { recipes } = useContext(RecipeContext);
-  const [activeAccordion, setActiveAccordion] = useState(null); // Track the active accordion
+  const [activeAccordion, setActiveAccordion] = useState(null); 
 
-  // Extract unique labels from recipes
   const getUniqueLabels = (key) => {
     return Array.from(
       new Set(
@@ -24,7 +23,7 @@ const FilterMenu = ({ isOpen, onClose, onKeyDown, query, setQuery }) => {
   const cuisineType = getUniqueLabels("cuisineType");
   const mealType = getUniqueLabels("mealType");
 
-  // Toggle accordion state
+
   const toggleAccordion = (accordionName) => {
     setActiveAccordion((prev) => (prev === accordionName ? null : accordionName));
   };

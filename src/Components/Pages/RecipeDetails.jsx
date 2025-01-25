@@ -6,7 +6,11 @@ import Header from "../Header";
 import Footer from "../Footer";
 
 function RecipeDetails() {
-  const { recipes, savedRecipes = [], toggleSaveRecipe } = useContext(RecipeContext);
+  const {
+    recipes,
+    savedRecipes = [],
+    toggleSaveRecipe,
+  } = useContext(RecipeContext);
 
   const { recipeLabel } = useParams();
   const [recipe, setRecipe] = useState(null);
@@ -14,7 +18,6 @@ function RecipeDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Apply dark mode class to body
     document.body.classList.add("bg-main-100", "dark:bg-main-900");
 
     return () => {
@@ -23,7 +26,6 @@ function RecipeDetails() {
   }, []);
 
   useEffect(() => {
-    
     const foundRecipe = recipes.find(
       (rec) => rec.recipe?.label === decodeURIComponent(recipeLabel)
     );
@@ -31,17 +33,14 @@ function RecipeDetails() {
     if (foundRecipe) {
       setRecipe(foundRecipe.recipe);
 
-     
       const isRecipeSaved = savedRecipes.some(
         (savedRecipe) => savedRecipe.recipe?.label === foundRecipe.recipe?.label
       );
       setIsSaved(isRecipeSaved);
     } else {
-      setRecipe(null); // Ensure recipe is null if not found
+      setRecipe(null);
     }
   }, [recipeLabel, recipes, savedRecipes]);
-
-  
 
   if (!recipe) {
     return <div className="p-4 text-center">Recipe not found!</div>;
@@ -71,8 +70,6 @@ function RecipeDetails() {
             <h1 className="text-[26px] leading-7 font-bold mb-4">
               {recipe.label || "No Title"}
             </h1>
-
-            
           </div>
           <p className="text-[12px] text-main-400">
             by {recipe.source || "Unknown"}

@@ -8,8 +8,7 @@ import RecipeCard from "../RecipeCard";
 import Footer from "../Footer";
 import LatestRecipes from "../LatestRecipes";
 import MealCategory from "../MealCategory";
-import { useNavigate } from "react-router-dom"; // Corrected import for navigation
-
+import { useNavigate } from "react-router-dom"; 
 function Home() {
   const {
     loading,
@@ -29,8 +28,7 @@ function Home() {
   const [selectedCategory, setSelectedCategory] = useState("Breakfast");
   const [healthLabels, setHealthLabels] = useState([]);
 
-  const navigate = useNavigate(); // Initialize navigate hook
-
+  const navigate = useNavigate(); 
   useEffect(() => {
     if (selectedCategory) {
       fetchData(selectedCategory).then(() => {
@@ -38,7 +36,7 @@ function Home() {
           recipeObj.recipe.healthLabels
         );
         setHealthLabels([...new Set(labels)]);
-        setVisibleRecipe(10); // Reset visible recipes on category change
+        setVisibleRecipe(10); 
       });
     }
   }, []);

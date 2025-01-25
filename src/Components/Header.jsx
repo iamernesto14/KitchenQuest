@@ -11,12 +11,11 @@ function Header() {
   );
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Toggle dark mode
+ 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  // Set the theme on initial load based on saved preference
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
@@ -38,7 +37,7 @@ function Header() {
     }
   }, [isDarkMode]);
 
-  // Update the active state whenever the location changes
+
   useEffect(() => {
     setIsSavedActive(location.pathname === "/saved-recipes");
   }, [location.pathname]);
