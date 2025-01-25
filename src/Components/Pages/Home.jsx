@@ -8,6 +8,7 @@ import RecipeCard from "../RecipeCard";
 import Footer from "../Footer";
 import LatestRecipes from "../LatestRecipes";
 import MealCategory from "../MealCategory";
+import { useNavigate } from "react-router-dom"; // Corrected import for navigation
 
 function Home() {
   const {
@@ -25,15 +26,36 @@ function Home() {
   } = useContext(RecipeContext);
 
   const [visibleRecipe, setVisibleRecipe] = useState(10);
-  const [selectedCategory, setSelectedCategory] = useState("Breakfast"); // Default to Breakfast
+  const [selectedCategory, setSelectedCategory] = useState("Breakfast");
+  const [healthLabels, setHealthLabels] = useState([]);
+
+  const navigate = useNavigate(); // Initialize navigate hook
 
   useEffect(() => {
-    fetchData(selectedCategory); // Fetch recipes based on selected category
-  }, [selectedCategory]);
+    if (selectedCategory) {
+      fetchData(selectedCategory).then(() => {
+        const labels = recipes.flatMap((recipeObj) =>
+          recipeObj.recipe.healthLabels
+        );
+        setHealthLabels([...new Set(labels)]);
+        setVisibleRecipe(10); // Reset visible recipes on category change
+      });
+    }
+  }, []);
+
+  const handleCategoryClick = (category) => {
+    if (selectedCategory !== category) {
+      setSelectedCategory(category);
+    }
+  };
+
+  const handleHealthLabelClick = (label) => {
+    navigate("/all-recipes", { state: { filter: label } });
+  };
 
   useEffect(() => {
     handleSearch();
-  }, [query]);
+  }, []);
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -46,19 +68,13 @@ function Home() {
     setVisibleRecipe((prevVisible) => prevVisible + 5);
   };
 
-  // const handleCategoryClick = (category) => {
-  //   setSelectedCategory(category);
-  // };
-
   return (
     <div className="bg-main-200 dark:bg-main-900 dark:text-main-100 min-h-screen flex flex-col">
       <Header />
       <div className="flex-grow">
         {/* Hero Section */}
         <div className="relative flex items-center justify-center gap-4 flex-col h-[350px] mt-20 bg-hero-bg dark:bg-hero-bg2 bg-cover bg-center m-2 rounded-lg overflow-hidden">
-          {/* Overlay */}
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-          {/* Content */}
           <div className="relative z-10 flex flex-col items-center">
             <h1 className="text-4xl md:text-5xl text-white font-bold">
               Your desire dish?
@@ -148,6 +164,27 @@ function Home() {
           recipes={frenchRecipes}
           error={error}
         />
+      </div>
+
+      <div className="mt-8 px-4">
+        <h2 className="text-4xl text-center font-semibold text-gray-700 dark:text-white mb-3">
+          Choose your health preference.
+        </h2>
+        <p className="text-center mb-4">
+          Choosing your health preference is an important step towards
+          achieving a healthier lifestyle.
+        </p>
+        <div className="flex flex-wrap justify-center gap-2">
+          {healthLabels.map((label, index) => (
+            <button
+              key={index}
+              onClick={() => handleHealthLabelClick(label)}
+              className="px-3 py-2 bg-yellow-600 text-white rounded-md font-medium hover:bg-yellow-700 transition-all"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Footer section */}

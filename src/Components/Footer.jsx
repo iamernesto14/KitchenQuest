@@ -2,9 +2,9 @@ import React from "react";
 import logo from "../assets/logo.png";
 import smallLogo from "../assets/smallLogo.png";
 
-function Footer({className}) {
+function Footer({ className }) {
   return (
-    <div className="text-sm pb-[104px] md:pb-5 pt-10 dark:bg-main-900 text-center dark:text-main-100">
+    <footer className="text-sm pb-[104px] md:pb-5 pt-10 dark:bg-main-900 text-center dark:text-main-100">
       <hr className="bg-main-700 mb-3 h-[2px]" />
 
       <div className="mx-5 md:flex justify-between items-center md:text-lg">
@@ -18,7 +18,7 @@ function Footer({className}) {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 

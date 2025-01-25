@@ -8,18 +8,18 @@ export const RecipeProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
-  const [chineseRecipes, setChineseRecipes] = useState([]); // State for Chinese recipes
-  const [frenchRecipes, setFrenchRecipes] = useState([]); // State for French recipes
-
-
+  const [chineseRecipes, setChineseRecipes] = useState([]);
+  const [frenchRecipes, setFrenchRecipes] = useState([]);
+  const [savedRecipes, setSavedRecipes] = useState([]);
 
   const url = "https://api.edamam.com/api/recipes/v2";
-  const appId = "a01f6407";
-  const apiKey = "18a2add0eb54955b914af9f22cda0d33";
+  const appId = "3c96fb16";
+  const apiKey = "d892c4b57d72b3ce83051bb8a8aa4bc5";
 
+  // Fetch recipes
   const fetchData = async (category) => {
     setLoading(true);
-    setError(null); // Reset error before fetching
+    setError(null);
     try {
       const response = await axios.get(url, {
         params: {
@@ -29,8 +29,6 @@ export const RecipeProvider = ({ children }) => {
           app_key: apiKey,
         },
       });
-      console.log("Fetched data", response.data);
-      console.log("Recipe Hits", response.data.hits);
       setRecipes(response.data.hits);
       setLoading(false);
     } catch (error) {
@@ -52,7 +50,7 @@ export const RecipeProvider = ({ children }) => {
           app_key: apiKey,
         },
       });
-      setChineseRecipes(response.data.hits); // Set Chinese recipes
+      setChineseRecipes(response.data.hits);
     } catch (error) {
       setError("Failed to fetch recipes");
     } finally {
@@ -72,7 +70,7 @@ export const RecipeProvider = ({ children }) => {
           app_key: apiKey,
         },
       });
-      setFrenchRecipes(response.data.hits); // Set French recipes
+      setFrenchRecipes(response.data.hits);
     } catch (error) {
       setError("Failed to fetch French recipes");
     } finally {
@@ -80,15 +78,31 @@ export const RecipeProvider = ({ children }) => {
     }
   };
 
-  // fetchData();
   const handleSearch = () => {
     if (query.trim()) {
       fetchData(query);
-      setQuery("")
-    } else {
-      setError("Search query cannot be empty.");
     }
   };
+
+  // Toggle save/unsave recipe
+  const toggleRecipeSave = (recipe) => {
+    setSavedRecipes((prev) => {
+      const isAlreadySaved = prev.some((saved) => saved.uri === recipe.uri);
+      const updatedRecipes = isAlreadySaved
+        ? prev.filter((saved) => saved.uri !== recipe.uri)
+        : [...prev, recipe];
+
+      // Update localStorage
+      localStorage.setItem("savedRecipes", JSON.stringify(updatedRecipes));
+      return updatedRecipes;
+    });
+  };
+
+  // Load saved recipes from localStorage
+  useEffect(() => {
+    const storedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+    setSavedRecipes(storedRecipes);
+  }, []);
 
   return (
     <RecipeContext.Provider
@@ -98,6 +112,8 @@ export const RecipeProvider = ({ children }) => {
         recipes,
         setRecipes,
         fetchData,
+        toggleRecipeSave,
+        savedRecipes,
         query,
         setQuery,
         handleSearch,
@@ -105,7 +121,7 @@ export const RecipeProvider = ({ children }) => {
         chineseRecipes,
         fetchChineseRecipes,
         frenchRecipes,
-        fetchFrenchRecipes
+        fetchFrenchRecipes,
       }}
     >
       {children}
