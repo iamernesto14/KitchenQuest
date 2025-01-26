@@ -12,11 +12,16 @@ function RecipeCard({ recipe, width }) {
     <div
       className={`rounded-lg shadow-sm overflow-hidden ${width} bg-white dark:bg-main-600 dark:text-main-100 hover:shadow-md transition-shadow cursor-pointer`}
     >
+      <Link
+          to={`/recipe/${encodeURIComponent(recipe.label)}`}
+          className="block"
+        >
       <img
         src={recipe.image}
         alt={recipe.label}
         className="w-full h-40 object-cover"
       />
+      </Link>
       <div className="p-3 bg-white dark:bg-main-600">
         <Link
           to={`/recipe/${encodeURIComponent(recipe.label)}`}
