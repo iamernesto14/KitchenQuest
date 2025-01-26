@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 
-function LatestRecipes({ fetchRecipes, title, recipes, error}) {
+function LatestRecipes({ fetchRecipes, title, recipes, error }) {
   useEffect(() => {
     fetchRecipes();
   }, []);

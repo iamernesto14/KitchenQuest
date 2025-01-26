@@ -35,7 +35,11 @@ function RecipeCard({ recipe, width }) {
             onClick={() => toggleRecipeSave(recipe)}
             className="text-yellow-600 hover:text-yellow-700"
           >
-            {isSaved ? <MdOutlineBookmark size={24} /> : <MdOutlineBookmarkAdd size={24} />}
+            {isSaved ? (
+              <MdOutlineBookmark size={24} />
+            ) : (
+              <MdOutlineBookmarkAdd size={24} />
+            )}
           </button>
         </div>
       </div>

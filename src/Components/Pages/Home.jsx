@@ -8,7 +8,7 @@ import RecipeCard from "../RecipeCard";
 import Footer from "../Footer";
 import LatestRecipes from "../LatestRecipes";
 import MealCategory from "../MealCategory";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 function Home() {
   const {
     loading,
@@ -28,15 +28,15 @@ function Home() {
   const [selectedCategory, setSelectedCategory] = useState("Breakfast");
   const [healthLabels, setHealthLabels] = useState([]);
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   useEffect(() => {
     if (selectedCategory) {
       fetchData(selectedCategory).then(() => {
-        const labels = recipes.flatMap((recipeObj) =>
-          recipeObj.recipe.healthLabels
+        const labels = recipes.flatMap(
+          (recipeObj) => recipeObj.recipe.healthLabels
         );
         setHealthLabels([...new Set(labels)]);
-        setVisibleRecipe(10); 
+        setVisibleRecipe(10);
       });
     }
   }, []);
@@ -169,8 +169,8 @@ function Home() {
           Choose your health preference.
         </h2>
         <p className="text-center mb-4">
-          Choosing your health preference is an important step towards
-          achieving a healthier lifestyle.
+          Choosing your health preference is an important step towards achieving
+          a healthier lifestyle.
         </p>
         <div className="flex flex-wrap justify-center gap-2">
           {healthLabels.map((label, index) => (

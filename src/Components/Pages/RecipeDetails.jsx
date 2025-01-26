@@ -6,11 +6,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 
 function RecipeDetails() {
-  const {
-    recipes,
-    savedRecipes = [],
-    toggleSaveRecipe,
-  } = useContext(RecipeContext);
+  const { recipes, savedRecipes = [] } = useContext(RecipeContext);
 
   const { recipeLabel } = useParams();
   const [recipe, setRecipe] = useState(null);

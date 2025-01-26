@@ -8,7 +8,7 @@ const FilterAccordion = ({
   healthLabels,
   dishType,
   cuisineType,
-  mealType
+  mealType,
 }) => {
   return (
     <div className="p-4 pb-[80px] space-y-4">
@@ -19,7 +19,9 @@ const FilterAccordion = ({
           onClick={() => toggleAccordion("diet")}
         >
           <span>Diet</span>
-          <span>{activeAccordion === "diet" ? <IoIosArrowUp /> : <IoIosArrowDown />}</span>
+          <span>
+            {activeAccordion === "diet" ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          </span>
         </div>
         {activeAccordion === "diet" && (
           <div className="mt-2 space-y-2 max-h-60 overflow-y-auto">
@@ -42,7 +44,13 @@ const FilterAccordion = ({
           onClick={() => toggleAccordion("health")}
         >
           <span>Health</span>
-          <span>{activeAccordion === "health" ? <IoIosArrowUp /> : <IoIosArrowDown />}</span>
+          <span>
+            {activeAccordion === "health" ? (
+              <IoIosArrowUp />
+            ) : (
+              <IoIosArrowDown />
+            )}
+          </span>
         </div>
         {activeAccordion === "health" && (
           <div className="mt-2 space-y-2 max-h-60 overflow-y-auto">
@@ -65,7 +73,9 @@ const FilterAccordion = ({
           onClick={() => toggleAccordion("dish")}
         >
           <span>Dish</span>
-          <span>{activeAccordion === "dish" ? <IoIosArrowUp /> : <IoIosArrowDown />}</span>
+          <span>
+            {activeAccordion === "dish" ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          </span>
         </div>
         {activeAccordion === "dish" && (
           <div className="mt-2 space-y-2 max-h-60 overflow-y-auto">
@@ -88,7 +98,13 @@ const FilterAccordion = ({
           onClick={() => toggleAccordion("cuisine")}
         >
           <span>Cuisine</span>
-          <span>{activeAccordion === "cuisine" ? <IoIosArrowUp /> : <IoIosArrowDown />}</span>
+          <span>
+            {activeAccordion === "cuisine" ? (
+              <IoIosArrowUp />
+            ) : (
+              <IoIosArrowDown />
+            )}
+          </span>
         </div>
         {activeAccordion === "cuisine" && (
           <div className="mt-2 space-y-2 max-h-60 overflow-y-auto">
@@ -111,7 +127,9 @@ const FilterAccordion = ({
           onClick={() => toggleAccordion("meal")}
         >
           <span>Meal</span>
-          <span>{activeAccordion === "meal" ? <IoIosArrowUp /> : <IoIosArrowDown />}</span>
+          <span>
+            {activeAccordion === "meal" ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          </span>
         </div>
         {activeAccordion === "meal" && (
           <div className="mt-2 space-y-2 max-h-60 overflow-y-auto">

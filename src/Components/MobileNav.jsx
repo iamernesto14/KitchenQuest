@@ -5,8 +5,8 @@ import { TiThMenuOutline } from "react-icons/ti";
 import { Link, useLocation } from "react-router-dom";
 
 function MobileNav() {
-  const location = useLocation(); 
-  const isActive = (path) => location.pathname === path; 
+  const location = useLocation();
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav

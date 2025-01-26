@@ -16,7 +16,7 @@ export const RecipeProvider = ({ children }) => {
   const appId = "3c96fb16";
   const apiKey = "d892c4b57d72b3ce83051bb8a8aa4bc5";
 
-  // Fetch recipes
+  // Fetching recipes
   const fetchData = async (category) => {
     setLoading(true);
     setError(null);
@@ -84,7 +84,6 @@ export const RecipeProvider = ({ children }) => {
     }
   };
 
-  
   const toggleRecipeSave = (recipe) => {
     setSavedRecipes((prev) => {
       const isAlreadySaved = prev.some((saved) => saved.uri === recipe.uri);
@@ -92,15 +91,14 @@ export const RecipeProvider = ({ children }) => {
         ? prev.filter((saved) => saved.uri !== recipe.uri)
         : [...prev, recipe];
 
-
       localStorage.setItem("savedRecipes", JSON.stringify(updatedRecipes));
       return updatedRecipes;
     });
   };
 
- 
   useEffect(() => {
-    const storedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+    const storedRecipes =
+      JSON.parse(localStorage.getItem("savedRecipes")) || [];
     setSavedRecipes(storedRecipes);
   }, []);
 

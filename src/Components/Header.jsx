@@ -11,7 +11,6 @@ function Header() {
   );
   const [isDarkMode, setIsDarkMode] = useState(false);
 
- 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
@@ -26,7 +25,6 @@ function Header() {
     }
   }, []);
 
-  // Update localStorage and root element class based on theme
   useEffect(() => {
     if (isDarkMode) {
       localStorage.setItem("theme", "dark");
@@ -36,7 +34,6 @@ function Header() {
       document.documentElement.classList.remove("dark");
     }
   }, [isDarkMode]);
-
 
   useEffect(() => {
     setIsSavedActive(location.pathname === "/saved-recipes");
@@ -99,7 +96,9 @@ function Header() {
         {/* Dark mode toggle */}
         <button
           onClick={toggleDarkMode}
-          aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+          aria-label={
+            isDarkMode ? "Switch to light mode" : "Switch to dark mode"
+          }
         >
           {isDarkMode ? <BsSun size={24} /> : <BsMoon size={24} />}
         </button>

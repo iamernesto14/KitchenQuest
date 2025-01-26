@@ -143,11 +143,7 @@ function AllRecipes() {
             mealType={mealType}
           />
 
-          {/* Apply and Clear Buttons */}
-          {/* <div className="absolute bottom-0 left-0 w-full flex justify-between items-center gap-4 p-4 pb-10 dark:bg-main-800 border-t border-gray-200">
-            <Button className="bg-main-400" name="Clear" />
-            <Button className="bg-orange-500" name="Apply" />
-          </div> */}
+      
         </div>
 
         {/* All Recipes */}

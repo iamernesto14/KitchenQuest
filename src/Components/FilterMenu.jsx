@@ -7,13 +7,11 @@ import Button from "./Button";
 
 const FilterMenu = ({ isOpen, onClose, onKeyDown, query, setQuery }) => {
   const { recipes } = useContext(RecipeContext);
-  const [activeAccordion, setActiveAccordion] = useState(null); 
+  const [activeAccordion, setActiveAccordion] = useState(null);
 
   const getUniqueLabels = (key) => {
     return Array.from(
-      new Set(
-        recipes.flatMap((recipe) => recipe.recipe[key] || [])
-      )
+      new Set(recipes.flatMap((recipe) => recipe.recipe[key] || []))
     );
   };
 
@@ -23,9 +21,10 @@ const FilterMenu = ({ isOpen, onClose, onKeyDown, query, setQuery }) => {
   const cuisineType = getUniqueLabels("cuisineType");
   const mealType = getUniqueLabels("mealType");
 
-
   const toggleAccordion = (accordionName) => {
-    setActiveAccordion((prev) => (prev === accordionName ? null : accordionName));
+    setActiveAccordion((prev) =>
+      prev === accordionName ? null : accordionName
+    );
   };
 
   return (
@@ -37,7 +36,10 @@ const FilterMenu = ({ isOpen, onClose, onKeyDown, query, setQuery }) => {
       {/* Close Button */}
       <div className="flex justify-between items-center p-4">
         <h2 className="text-lg font-semibold">Filter Recipes</h2>
-        <button className="text-2xl text-gray-600 dark:text-gray-300" onClick={onClose}>
+        <button
+          className="text-2xl text-gray-600 dark:text-gray-300"
+          onClick={onClose}
+        >
           <IoCloseSharp className="text-main-100" />
         </button>
       </div>
