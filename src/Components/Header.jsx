@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BsMoon, BsSun } from "react-icons/bs";
+import { GiKitchenKnives } from "react-icons/gi";
 import { GoBookmark, GoBookmarkFill } from "react-icons/go";
 import { Link, useLocation } from "react-router-dom";
 
@@ -42,8 +43,8 @@ function Header() {
   return (
     <header className="flex justify-between items-center fixed top-0 w-full z-40 bg-white dark:bg-main-600 dark:text-main-100 px-5 h-[4.5rem] shadow">
       {/* Logo Section */}
-      <div className="font-bold text-xl dark:text-main-100" aria-label="Logo">
-        LOGO
+      <div className="font-bold text-xl flex justify-center items-center gap-2 dark:text-main-100" aria-label="Logo">
+      <GiKitchenKnives /> KITCHENQUEST
       </div>
 
       {/* Navigation Section */}
